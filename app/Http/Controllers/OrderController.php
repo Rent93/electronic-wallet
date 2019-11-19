@@ -6,8 +6,7 @@ use App\Order;
 use App\User;
 use Illuminate\Http\Request;
 
-class OrderController extends Controller
-{
+class OrderController extends Controller {
     /**
      * Display a listing of the resource.
      *
@@ -24,9 +23,8 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create() {
+        return view('front-end.order.create');
     }
 
     /**

@@ -18,3 +18,5 @@ Route::get('register', 'Auth\RegisterController@getRegister')
     ->name('register');
 
 Route::get('orders', 'OrderController@index')->name('order.index');
+
+Route::get('order/create', 'OrderController@create')->name('order.create');
