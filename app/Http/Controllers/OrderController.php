@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Session;
 use Stripe;
+use Auth;
 
 class OrderController extends Controller {
     /**
@@ -37,6 +38,9 @@ class OrderController extends Controller {
      * @throws Stripe\Exception\ApiErrorException
      */
     public function store(Request $request) {
+
+
+
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
         /**
@@ -54,17 +58,24 @@ class OrderController extends Controller {
             'customer' => $customer->id,
         ]);
 
-        dd( $charge );
-
         if ( $charge['status'] == 'succeeded' ) {
 
             /**
              * Save to Database
              */
-//            $order = new Order();
-//            $order->code -
+            $order = new Order();
+            $order->code = $charge['id'];
+            $order->user_id = Auth::user()->id;
+            $order->amount = $charge['amount'];
+            $order->currency = $charge['currency'];
+            $order->content = $charge['description'];
+            $order->status = $charge['status'];
+            $order->ip_address = get_ip_address();
 
-            Session::flash('success', 'Payment successful!');
+            $order->save();
+
+
+            Session::flash('success', 'Your payment successful!');
         } else {
             Session::flash('error', 'Please check your information again and make sure it\'s correct!.');
         }

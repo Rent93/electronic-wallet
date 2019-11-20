@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
             $table->bigInteger('amount');
             $table->string('currency');
             $table->text('content');
-            $table->integer('status');
+            $table->string('status');
             $table->string('ip_address');
             $table->timestamps();
         });
