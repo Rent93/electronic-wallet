@@ -37,16 +37,19 @@ class OrderController extends Controller {
      * @throws Stripe\Exception\ApiErrorException
      */
     public function store(Request $request) {
-        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-        
-        $charge = \Stripe\Charge::create([
+        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        $charge = Stripe\Charge::create([
             'amount' => ($request->amount) * 100,
             'currency' => 'usd',
             'description' => $request->content,
             'source' => $request->stripeToken
         ]);
-
-        Session::flash('success', 'Payment successful!');
+        if ( $charge['status'] == 'succeeded' ) {
+            Session::flash('success', 'Payment successful!');
+        } else {
+            Session::flash('error', 'Please check your information again and make sure it\'s correct!.');
+        }
 
         return back();
     }
