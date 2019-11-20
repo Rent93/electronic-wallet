@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->bigInteger('amount');
+            $table->string('currency');
             $table->text('content');
             $table->integer('status');
             $table->string('ip_address');

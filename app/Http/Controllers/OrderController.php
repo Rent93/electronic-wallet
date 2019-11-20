@@ -53,7 +53,17 @@ class OrderController extends Controller {
             'description' => $request->content,
             'customer' => $customer->id,
         ]);
+
+        dd( $charge );
+
         if ( $charge['status'] == 'succeeded' ) {
+
+            /**
+             * Save to Database
+             */
+//            $order = new Order();
+//            $order->code -
+
             Session::flash('success', 'Payment successful!');
         } else {
             Session::flash('error', 'Please check your information again and make sure it\'s correct!.');
