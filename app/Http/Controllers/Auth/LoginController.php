@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Validator;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -25,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -37,7 +40,34 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function getLogin() {
-        return 'This is login page';
+    public function getLogin()
+    {
+        return view('front-end.auth.login');
+    }
+
+
+    public function postLogin(Request $req) {
+//         dd( $req->all() );
+        $rules = [
+            'username' => 'required',
+            'password' => 'required',
+        ];
+
+        $validator = Validator::make($req->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        if (Auth::attempt(['username' => $req->username, 'password' => $req->password])) {
+            return redirect($this->redirectTo)->with([
+                'type' => 'success',
+                'message' => 'You have been successfully logged in.'
+            ]);
+        }
+
+        return redirect()->back()->with([
+            'type' => 'errorLogin',
+            'message' => 'Something went wrong.'
+        ]);
     }
 }

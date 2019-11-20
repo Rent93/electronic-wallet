@@ -4,13 +4,13 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6 offset-md-3">
             <div class="card">
                 <div class="card-header bg-info text-white">
                     Create new order.
                 </div>
                 <div class="card-body">
-                    <form method="POST">
+                    <form action="{{ route('order.store') }}" method="POST" id="payment-form">
                         @csrf
                         <div class="form-group">
                             <label for="order_type">Order type:</label>
@@ -22,16 +22,48 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="amount">Amount:</label>
-                            <input type="number" name="amount" class="form-control" id="amount" placeholder="Amount" autocapitalize="off">
+                            <label for="name">Name:</label>
+                            <input type="text" name="name" value="Nguyen Minh Tuan" class="form-control" id="name" placeholder="Your name"
+                                   autocapitalize="off">
                         </div>
                         <div class="form-group">
-                            <label for="content">Amount:</label>
-                            <textarea name="content" class="form-control" id="content" cols="30" rows="4" placeholder="Content of order"></textarea>
+                            <label for="amount">Email:</label>
+                            <input type="email" name="email" value="tuan.ltv.110893@gmail.com" class="form-control" id="email" placeholder="Your email"
+                                   autocapitalize="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="amount">Amount:</label>
+                            <input type="number" name="amount" value="100" class="form-control" id="amount" placeholder="Amount"
+                                   autocapitalize="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="content">Content of payment:</label>
+                            <textarea name="content" class="form-control" id="content" cols="30" rows="4"
+                                      placeholder="Content of order">This one just to test payment</textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-info">Proceed to Pay</button>
+                        <div class="form-group">
+                            <div id="card-element">
+                                <!-- Elements will create input elements here -->
+                            </div>
+                        </div>
+
+                        <!-- We'll put the error messages in this element -->
+                        <div class="form-group">
+                            <div id="card-errors" role="alert"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-block btn-info">Proceed to payment</button>
+                        </div>
                     </form>
+
+                    @if (Session::has('success'))
+                        <div class="alert alert-success">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                            <p>{{ Session::get('success') }}</p>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

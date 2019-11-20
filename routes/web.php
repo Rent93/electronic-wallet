@@ -18,9 +18,12 @@ Route::get('/', function() {
 Route::get('login', 'Auth\LoginController@getLogin')
     ->name('login');
 
+Route::post('login', 'Auth\LoginController@postLogin');
+
 Route::get('register', 'Auth\RegisterController@getRegister')
     ->name('register');
 
 Route::get('orders', 'OrderController@index')->name('order.index');
 
 Route::get('order/create', 'OrderController@create')->name('order.create');
+Route::post('order/store', 'OrderController@store')->name('order.store');
