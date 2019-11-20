@@ -39,11 +39,19 @@ class OrderController extends Controller {
     public function store(Request $request) {
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
+        /**
+         * Create customer save bby API(s)
+         */
+        $customer = Stripe\Customer::create([
+            "email" => $request->email,
+            "source" => $request->stripeToken
+        ]);
+
         $charge = Stripe\Charge::create([
             'amount' => ($request->amount) * 100,
             'currency' => 'usd',
             'description' => $request->content,
-            'source' => $request->stripeToken
+            'customer' => $customer->id,
         ]);
         if ( $charge['status'] == 'succeeded' ) {
             Session::flash('success', 'Payment successful!');
