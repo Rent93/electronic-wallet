@@ -29,6 +29,8 @@
                             <label for="content">Amount:</label>
                             <textarea name="content" class="form-control" id="content" cols="30" rows="4" placeholder="Content of order"></textarea>
                         </div>
+
+                        <button type="submit" class="btn btn-info">Proceed to Pay</button>
                     </form>
                 </div>
             </div>

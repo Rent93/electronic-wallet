@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/', function() {
+    return view('welcome');
+});
+
 Route::get('login', 'Auth\LoginController@getLogin')
     ->name('login');
 
