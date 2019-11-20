@@ -33,7 +33,7 @@
                         </div>
                         <div class="form-group">
                             <label for="amount">Amount:</label>
-                            <input type="number" name="amount" value="100" class="form-control" id="amount" placeholder="Amount"
+                            <input type="number" name="amount" value="5" class="form-control" id="amount" placeholder="Amount"
                                    autocapitalize="off">
                         </div>
                         <div class="form-group">

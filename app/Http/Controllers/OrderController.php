@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Session;
 use Stripe;
 
 class OrderController extends Controller {
@@ -36,21 +37,15 @@ class OrderController extends Controller {
      * @throws Stripe\Exception\ApiErrorException
      */
     public function store(Request $request) {
-        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-
-        $customer = Stripe\Customer::create(array(
-            'email' => $request->email,
-            'card'  => $request->stripeToken,
-        ));
-
-
-        $charge = Stripe\Charge::create ([
-            'customer'      => $customer->id,
-            'amount'        => $request->amount * 100,
-            'currency'      => "usd",
-            'description'   => $request->content,
+        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        
+        $charge = \Stripe\Charge::create([
+            'amount' => ($request->amount) * 100,
+            'currency' => 'usd',
+            'description' => $request->content,
+            'source' => $request->stripeToken
         ]);
-        dd($charge);
+
         Session::flash('success', 'Payment successful!');
 
         return back();
