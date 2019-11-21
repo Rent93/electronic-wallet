@@ -27,3 +27,7 @@ Route::get('orders', 'OrderController@index')->name('order.index');
 
 Route::get('order/create', 'OrderController@create')->name('order.create');
 Route::post('order/store', 'OrderController@store')->name('order.store');
+
+
+Route::get('vnpay/payment', 'OrderController@vnpay_return_url')
+    ->name('order.vnpay.return');

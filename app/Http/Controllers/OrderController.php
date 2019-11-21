@@ -65,7 +65,7 @@ class OrderController extends Controller
                     "vnp_Locale" => $vnp_Locale,
                     "vnp_OrderInfo" => $vnp_OrderInfo,
                     "vnp_OrderType" => $vnp_OrderType,
-                    "vnp_ReturnUrl" => url()->previous(),
+                    "vnp_ReturnUrl" => route('order.vnpay.return'),
                     "vnp_TxnRef" => date("YmdHis"),
                 );
 
@@ -146,6 +146,10 @@ class OrderController extends Controller
         }
 
         return back();
+    }
+
+    public function vnpay_return_url() {
+        return view('front-end.order.vnpay_return');
     }
 
     /**
