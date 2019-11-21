@@ -43,15 +43,65 @@ class OrderController extends Controller
     public function store(Request $request)
     {
 
-//        dd($request->all());
-
         $payment_method = $request->payment_method;
 
         switch ($payment_method) {
             case 'vnpay':
-                dd('vnpay');
+                $vnp_OrderInfo = $request->content;
+                $vnp_OrderType = $request->order_type;
+                $vnp_Amount = ($request->amount) * 100;
+                $vnp_Locale = $request->language;
+                $vnp_BankCode = $request->bank_code;
+                $vnp_IpAddr = request()->ip();
+
+                $inputData = array(
+                    "vnp_Version" => "2.0.0",
+                    "vnp_TmnCode" => env('VNP_TMNCODE'),
+                    "vnp_Amount" => $vnp_Amount,
+                    "vnp_Command" => "pay",
+                    "vnp_CreateDate" => date('YmdHis'),
+                    "vnp_CurrCode" => "VND",
+                    "vnp_IpAddr" => $vnp_IpAddr,
+                    "vnp_Locale" => $vnp_Locale,
+                    "vnp_OrderInfo" => $vnp_OrderInfo,
+                    "vnp_OrderType" => $vnp_OrderType,
+                    "vnp_ReturnUrl" => url()->previous(),
+                    "vnp_TxnRef" => date("YmdHis"),
+                );
+
+                if (isset($vnp_BankCode) && $vnp_BankCode != "") {
+                    $inputData['vnp_BankCode'] = $vnp_BankCode;
+                }
+
+                ksort($inputData);
+                $query = "";
+                $i = 0;
+                $hashdata = "";
+                foreach ($inputData as $key => $value) {
+                    if ($i == 1) {
+                        $hashdata .= '&' . $key . "=" . $value;
+                    } else {
+                        $hashdata .= $key . "=" . $value;
+                        $i = 1;
+                    }
+                    $query .= urlencode($key) . "=" . urlencode($value) . '&';
+                }
+
+                $vnp_Url = env('VNP_URL') . "?" . $query;
+
+                1$vnpSecureHash = hash('sha256', env('VNP_HASHSECRET') . $hashdata);
+                $vnp_Url .= 'vnp_SecureHashType=SHA256&vnp_SecureHash=' . $vnpSecureHash;
+                $returnData = array(
+                    'code' => '00',
+                    'message' => 'success',
+                    'data' => $vnp_Url
+                );
+
+                return redirect($vnp_Url);
+                break;
             case 'baokim':
                 dd('baokim');
+                break;
             case 'stripe':
                 Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 

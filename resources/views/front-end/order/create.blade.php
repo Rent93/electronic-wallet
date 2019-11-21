@@ -15,10 +15,9 @@
                         <div class="form-group">
                             <label for="order_type">Order type:</label>
                             <select name="order_type" class="form-control" id="order_type">
-                                <option>--Select--</option>
-                                <option value="1">Top up your phone account</option>
-                                <option value="2">Pay the bill</option>
-                                <option value="3">Fashion</option>
+                                <option value="topup">Top up your phone account</option>
+                                <option value="billpayment">Pay the bill</option>
+                                <option value="fashion">Fashion</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -35,7 +34,7 @@
                         </div>
                         <div class="form-group">
                             <label for="amount">Amount:</label>
-                            <input type="number" name="amount" value="5" class="form-control" id="amount"
+                            <input type="number" name="amount" value="50000" class="form-control" id="amount"
                                    placeholder="Amount"
                                    autocapitalize="off">
                         </div>
@@ -43,6 +42,13 @@
                             <label for="content">Content of payment:</label>
                             <textarea name="content" class="form-control" id="content" cols="30" rows="4"
                                       placeholder="Content of order">This one just to test payment</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="language">Language:</label>
+                            <select name="language" id="language" class="form-control">
+                                <option value="vn">VietNam</option>
+                                <option value="en">English</option>
+                            </select>
                         </div>
 
                         <div class="form-group">
@@ -85,7 +91,10 @@
                         </div>
                         <div class="form-group payment-method" id="vnpay" style="display: none">
                             <h3 class="title">PAYMENT INFORMATION</h3>
-                            This one will be update later. (VNPay)
+                            <div class="form-group">
+                                <label for="bank_code">Bank:</label>
+                                @include ('front-end.template-part.banks')
+                            </div>
                         </div>
                         <div class="form-group payment-method" id="baokim" style="display: none">
                             <h3 class="title">PAYMENT INFORMATION</h3>
