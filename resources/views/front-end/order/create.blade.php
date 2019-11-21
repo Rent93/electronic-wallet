@@ -43,9 +43,13 @@
                         </div>
 
                         <div class="form-group">
-                            <div id="card-element">
-                                <!-- Elements will create input elements here -->
-                            </div>
+                            <fieldset>
+                                <label class="card--custom">
+                                    <span>Card</span>
+                                    <div id="card-element"></div>
+                                </label>
+                            </fieldset>
+
                         </div>
 
                         <!-- We'll put the error messages in this element -->
