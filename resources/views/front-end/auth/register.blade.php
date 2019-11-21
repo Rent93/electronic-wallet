@@ -12,23 +12,23 @@
                         @csrf
                         <div class="form-group">
                             <label for="username">Username: </label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Your username">
+                            <input type="text" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}" id="username" name="username" placeholder="Your username">
                         </div>
                         <div class="form-group">
                             <label for="name">Name: </label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Your name">
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Your name">
                         </div>
                         <div class="form-group">
                             <label for="email">Email: </label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Your email">
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" id="email" name="email" placeholder="Your email">
                         </div>
                         <div class="form-group">
                             <label for="password">Password: </label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" id="password" name="password" placeholder="Password">
                         </div>
                         <div class="form-group">
                             <label for="password_confirmation">Confirm Password: </label>
-                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password">
+                            <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" value="{{ old('password_confirmation') }}" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password">
                         </div>
 
                         <button class="btn btn-info btn-block" type="submit">Register</button>

@@ -82,6 +82,7 @@ class RegisterController extends Controller
             'email'     => 'required|email|unique:users,email',
             'name'      => 'required',
             'password'  => 'required|min:4|max:100|confirmed',
+            'password_confirmation' => 'required',
         ];
 
         $validator = Validator::make( $request->all(), $rules );
