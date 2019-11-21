@@ -46,7 +46,7 @@
                         <div class="form-group">
                             <label for="language">Language:</label>
                             <select name="language" id="language" class="form-control">
-                                <option value="vn">VietNam</option>
+                                <option value="vn">Viet Nam</option>
                                 <option value="en">English</option>
                             </select>
                         </div>

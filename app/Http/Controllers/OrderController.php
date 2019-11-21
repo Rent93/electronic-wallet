@@ -89,7 +89,7 @@ class OrderController extends Controller
 
                 $vnp_Url = env('VNP_URL') . "?" . $query;
 
-                1$vnpSecureHash = hash('sha256', env('VNP_HASHSECRET') . $hashdata);
+                $vnpSecureHash = hash('sha256', env('VNP_HASHSECRET') . $hashdata);
                 $vnp_Url .= 'vnp_SecureHashType=SHA256&vnp_SecureHash=' . $vnpSecureHash;
                 $returnData = array(
                     'code' => '00',
