@@ -14,6 +14,27 @@ body nav.bg-info {
 div#card-element {
     width: 100%;
 }
+
+section.payment-method-info,
+section.payment-method-section {
+    border: 1px solid #ddd;
+    padding: 25px;
+    border-radius: 5px;
+    margin-top: 30px;
+}
+
+section.payment-method-info h3.title,
+section.payment-method-section h3.title {
+    margin-top: -35px;
+    background: white;
+    width: fit-content;
+    padding: 0 5px;
+}
+
+section.payment-method-info .selection,
+section.payment-method-section .selection {
+    margin-top: 25px;
+}
 label.card--custom {
     width: 100%;
     box-shadow: 0 1px 3px 0 rgba(50, 50, 93, 0.15), 0 4px 6px 0 rgba(112, 157, 199, 0.15);
@@ -30,14 +51,14 @@ label.card--custom {
 }
 
 label.card--custom > span {
-    min-width: 125px;
+    min-width: 80px;
     padding: 0 15px;
     text-align: right;
     color: #212529;
 }
 
 h3.title {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
 }
 

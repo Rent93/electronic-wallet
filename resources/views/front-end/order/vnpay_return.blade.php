@@ -34,11 +34,15 @@ np_SecureHash=856e481e74406c2b5cfc61eca2cc40672aeee7e62689b07cc6dc875a7b3166b2 -
                             <tbody>
                             <tr>
                                 <td>Amount</td>
-                                <td>{{ number_format( request()->vnp_Amount / 100, 2) }} VNĐ</td>
+                                <td>{{ number_format( request()->vnp_Amount / 100, 2, ',', '.') }} VND</td>
                             </tr>
                             <tr>
-                                <td>Bank</td>
+                                <td>Bank name</td>
                                 <td>{{ request()->vnp_BankCode }}</td>
+                            </tr>
+                            <tr>
+                                <td>Card type</td>
+                                <td>{{ request()->vnp_CardType }}</td>
                             </tr>
                             <tr>
                                 <td>Transaction number</td>
@@ -47,6 +51,10 @@ np_SecureHash=856e481e74406c2b5cfc61eca2cc40672aeee7e62689b07cc6dc875a7b3166b2 -
                             <tr>
                                 <td>Description</td>
                                 <td>{{ str_replace('+', ' ', request()->vnp_OrderInfo) }}</td>
+                            </tr>
+                            <tr>
+                                <td>IP Address</td>
+                                <td>{{ request()->ip() }}</td>
                             </tr>
                             </tbody>
                         </table>

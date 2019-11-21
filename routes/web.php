@@ -22,12 +22,16 @@ Route::post('login', 'Auth\LoginController@postLogin');
 
 Route::get('register', 'Auth\RegisterController@getRegister')
     ->name('register');
+Route::post('register', 'Auth\RegisterController@postRegister');
 
 Route::get('orders', 'OrderController@index')->name('order.index');
 
-Route::get('order/create', 'OrderController@create')->name('order.create');
+Route::get('order/create', 'OrderController@create')
+    ->name('order.create')
+    ->middleware('auth');
 Route::post('order/store', 'OrderController@store')->name('order.store');
 
 
 Route::get('vnpay/payment', 'OrderController@vnpay_return_url')
-    ->name('order.vnpay.return');
+    ->name('order.vnpay.return')
+    ->middleware('auth');

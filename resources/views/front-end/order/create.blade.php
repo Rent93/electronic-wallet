@@ -51,55 +51,63 @@
                             </select>
                         </div>
 
-                        <div class="form-group">
+                        <section class="form-group payment-method-section">
                             <h3 class="title">PAYMENT METHOD</h3>
-                            <div class="form-check js-change-payment-method">
-                                <label class="container--custom" data-type="stripe">
-                                    <span>Stripe Credit card</span>
-                                    <input type="radio" checked="checked" name="payment_method" value="stripe">
-                                    <span class="checkmark"></span>
-                                </label>
+                            <div class="selection">
+                                <div class="form-check js-change-payment-method">
+                                    <label class="container--custom" data-type="stripe">
+                                        <span>Stripe Credit card</span>
+                                        <input type="radio" checked="checked" name="payment_method" value="stripe">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="form-check js-change-payment-method">
+                                    <label class="container--custom" data-type="vnpay">
+                                        <span>VN Pay</span>
+                                        <input type="radio"name="payment_method" value="vnpay">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="form-check js-change-payment-method">
+                                    <label class="container--custom" data-type="baokim">
+                                        <span>Bao Kim</span>
+                                        <input type="radio" name="payment_method" value="baokim">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
                             </div>
-                            <div class="form-check js-change-payment-method">
-                                <label class="container--custom" data-type="vnpay">
-                                    <span>VN Pay</span>
-                                    <input type="radio"name="payment_method" value="vnpay">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="form-check js-change-payment-method">
-                                <label class="container--custom" data-type="baokim">
-                                    <span>Bao Kim</span>
-                                    <input type="radio" name="payment_method" value="baokim">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                        </div>
+                        </section>
 
-                        <div class="form-group payment-method" id="stripe">
+                        <section class="form-group payment-method payment-method-info" id="stripe">
                             <h3 class="title">PAYMENT INFORMATION</h3>
-                            <fieldset>
-                                <label class="card--custom">
-                                    <span>Card</span>
-                                    <div id="card-element"></div>
-                                </label>
-                            </fieldset>
-                            <!-- We'll put the error messages in this element -->
-                            <div class="form-group">
-                                <div id="card-errors" role="alert"></div>
+                            <div class="selection">
+                                <fieldset>
+                                    <label class="card--custom">
+                                        <span>Card</span>
+                                        <div id="card-element"></div>
+                                    </label>
+                                </fieldset>
+                                <!-- We'll put the error messages in this element -->
+                                <div class="form-group">
+                                    <div id="card-errors" role="alert"></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group payment-method" id="vnpay" style="display: none">
+                        </section>
+                        <section class="form-group payment-method payment-method-info" id="vnpay" style="display: none">
                             <h3 class="title">PAYMENT INFORMATION</h3>
-                            <div class="form-group">
-                                <label for="bank_code">Bank:</label>
-                                @include ('front-end.template-part.banks')
+                            <div class="selection">
+                                <div class="form-group">
+                                    <label for="bank_code">Bank:</label>
+                                    @include ('front-end.template-part.banks')
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group payment-method" id="baokim" style="display: none">
+                        </section>
+                        <section class="form-group payment-method payment-method-info" id="baokim" style="display: none">
                             <h3 class="title">PAYMENT INFORMATION</h3>
-                            This one will be update later. (BaoKim)
-                        </div>
+                            <div class="selection">
+                                This one will be update later. (BaoKim)
+                            </div>
+                        </section>
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-block btn-info">Proceed to payment</button>
