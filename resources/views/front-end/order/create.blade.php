@@ -23,17 +23,20 @@
                         </div>
                         <div class="form-group">
                             <label for="name">Name:</label>
-                            <input type="text" name="name" value="Nguyen Minh Tuan" class="form-control" id="name" placeholder="Your name"
+                            <input type="text" name="name" value="Nguyen Minh Tuan" class="form-control" id="name"
+                                   placeholder="Your name"
                                    autocapitalize="off">
                         </div>
                         <div class="form-group">
                             <label for="amount">Email:</label>
-                            <input type="email" name="email" value="tuan.ltv.110893@gmail.com" class="form-control" id="email" placeholder="Your email"
+                            <input type="email" name="email" value="tuan.ltv.110893@gmail.com" class="form-control"
+                                   id="email" placeholder="Your email"
                                    autocapitalize="off">
                         </div>
                         <div class="form-group">
                             <label for="amount">Amount:</label>
-                            <input type="number" name="amount" value="5" class="form-control" id="amount" placeholder="Amount"
+                            <input type="number" name="amount" value="5" class="form-control" id="amount"
+                                   placeholder="Amount"
                                    autocapitalize="off">
                         </div>
                         <div class="form-group">
@@ -43,18 +46,50 @@
                         </div>
 
                         <div class="form-group">
+                            <h3 class="title">PAYMENT METHOD</h3>
+                            <div class="form-check js-change-payment-method">
+                                <label class="container--custom" data-type="stripe">
+                                    <span>Stripe Credit card</span>
+                                    <input type="radio" checked="checked" name="payment_method" value="stripe">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="form-check js-change-payment-method">
+                                <label class="container--custom" data-type="vnpay">
+                                    <span>VN Pay</span>
+                                    <input type="radio"name="payment_method" value="vnpay">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="form-check js-change-payment-method">
+                                <label class="container--custom" data-type="baokim">
+                                    <span>Bao Kim</span>
+                                    <input type="radio" name="payment_method" value="baokim">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group payment-method" id="stripe">
+                            <h3 class="title">PAYMENT INFORMATION</h3>
                             <fieldset>
                                 <label class="card--custom">
                                     <span>Card</span>
                                     <div id="card-element"></div>
                                 </label>
                             </fieldset>
-
+                            <!-- We'll put the error messages in this element -->
+                            <div class="form-group">
+                                <div id="card-errors" role="alert"></div>
+                            </div>
                         </div>
-
-                        <!-- We'll put the error messages in this element -->
-                        <div class="form-group">
-                            <div id="card-errors" role="alert"></div>
+                        <div class="form-group payment-method" id="vnpay" style="display: none">
+                            <h3 class="title">PAYMENT INFORMATION</h3>
+                            This one will be update later. (VNPay)
+                        </div>
+                        <div class="form-group payment-method" id="baokim" style="display: none">
+                            <h3 class="title">PAYMENT INFORMATION</h3>
+                            This one will be update later. (BaoKim)
                         </div>
 
                         <div class="form-group">

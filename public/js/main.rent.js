@@ -32,6 +32,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
     form.addEventListener('submit', function(event) {
         event.preventDefault();
 
+        var payment_method = get_payment_method();
+
+        if ( payment_method !== 'stripe' ) {
+
+            form.submit();
+            return false;
+        }
+
         stripe.createToken(card).then(function(result) {
             if (result.error) {
                 // Inform the customer that there was an error.
@@ -55,5 +63,26 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         // Submit the form
         form.submit();
+    };
+});
+
+var get_payment_method = () => {
+    var radios = $('.container--custom input[type="radio"]'), value;
+    for (var i = 0; i < radios.length; i++) {
+        if (radios[i].type === 'radio' && radios[i].checked) {
+            return radios[i].value;
+        }
     }
+};
+
+$(document).ready(function () {
+    console.log('Rent is running...');
+    $(document).on('click', '.js-change-payment-method span', function (e) {
+        var $this = $(this);
+        var payment_method = $this.parent().attr('data-type');
+
+        $('.payment-method').hide();
+        $('.payment-method#' + payment_method).show();
+
+    });
 });
