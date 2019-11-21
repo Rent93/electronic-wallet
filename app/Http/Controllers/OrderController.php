@@ -30,7 +30,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view('front-end.order.create', );
+        return view('front-end.order.create');
     }
 
     /**
@@ -82,7 +82,7 @@ class OrderController extends Controller
                     $order->currency = $charge['currency'];
                     $order->content = $charge['description'];
                     $order->status = $charge['status'];
-                    $order->ip_address = get_ip_address();
+                    $order->ip_address = $_SERVER['REMOTE_ADDR'];
 
                     $order->save();
 
