@@ -14,14 +14,24 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
 
 Route::prefix('v1')->group(function() {
     Route::post('login', 'Api\AuthController@login');
     Route::post('register', 'Api\AuthController@register');
+
+
+    /**
+     * API for {user}
+     */
+    Route::get('users', 'Api\UserController@index');
+    Route::get('user/{id}', 'Api\UserController@show');
+
+
     Route::group(['middleware' => 'auth:api'], function() {
-        Route::post('user', 'Api\AuthController@getUser');
+        Route::put('user/{id}', 'Api\UserController@update');
+        Route::delete('user/{id}', 'Api\UserController@destroy');
     });
 });

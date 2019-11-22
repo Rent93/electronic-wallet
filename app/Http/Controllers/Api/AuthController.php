@@ -49,7 +49,7 @@ class AuthController extends Controller {
             return response()->json([
                 'data' => $success,
             ], $this->successStatus);
-        } else{
+        } else {
             return response()->json(['error'=>'Unauthorised'], 401);
         }
     }
