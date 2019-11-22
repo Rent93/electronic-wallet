@@ -9,6 +9,7 @@ use App\Http\Resources\Order as OrderResouce;
 
 class OrderController extends Controller
 {
+    protected $statusSuccess = 200;
     protected $statusNotFound = 404;
     public function __construct()
     {
@@ -64,7 +65,10 @@ class OrderController extends Controller
             ], $this->statusNotFound);
         }
 
-        return $order;
+        return response()->json([
+            'status' => $this->statusSuccess,
+            'data' => $order
+        ], $this->statusSuccess);
     }
 
     /**

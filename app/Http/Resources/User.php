@@ -16,7 +16,7 @@ class User extends JsonResource
         return [
             'type'          => 'user',
             'id'            => $this->id,
-            'data' => [
+            'attributes' => [
                 'username'      => $this->username,
                 'name'          => $this->name,
                 'email'         => $this->email,
@@ -26,10 +26,12 @@ class User extends JsonResource
         ];
     }
 
-//    public function with($request) {
-//        return [
-//            'version' => '1.0.0',
-//            'author' => 'Rent'
-//        ];
-//    }
+    public function with($request) {
+        return [
+            'about_api' => [
+                'version' => '1.0.0',
+                'author' => 'Rent'
+            ],
+        ];
+    }
 }

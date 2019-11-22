@@ -134,7 +134,9 @@ class UserController extends Controller
         }
 
         if ( $user->delete() ) {
-            return response()->json(['success' => 'Deleted Successfully'], $this->statusSuccess);
+            return response()->json([
+                'success' => 'Deleted Successfully'
+            ], $this->statusSuccess);
         }
     }
 }
