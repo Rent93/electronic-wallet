@@ -29,9 +29,18 @@ Route::prefix('v1')->group(function() {
     Route::get('users', 'Api\UserController@index');
     Route::get('user/{id}', 'Api\UserController@show');
 
-
-    Route::group(['middleware' => 'auth:api'], function() {
+    Route::middleware('auth:api')->group(function() {
+        /**
+         * USER API
+         */
         Route::put('user/{id}', 'Api\UserController@update');
         Route::delete('user/{id}', 'Api\UserController@destroy');
+
+        /**
+         * ORDER API
+         */
+        Route::get('orders', 'Api\OrderController@index');
+        Route::get('order/{id}', 'Api\OrderController@show');
+
     });
 });

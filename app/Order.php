@@ -14,4 +14,8 @@ class Order extends Model {
     public function scopeSort($query, $type) {
         return $query->orderBy('created_at', $type);
     }
+
+    public function scopeFindById($query, $id) {
+        return $query->where('id', $id);
+    }
 }

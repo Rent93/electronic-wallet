@@ -10,6 +10,8 @@ use Validator;
 
 class UserController extends Controller
 {
+    protected $statusSuccess = 200;
+    protected $statusNotFound = 404;
     /**
      * Display a listing of the resource.
      *
@@ -51,8 +53,15 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::findById($id)->first();
 
+        if ( empty($user) ) {
+            return response()->json([
+                'status' => $this->statusNotFound,
+                'data' => 'Not found'
+            ], $this->statusNotFound);
+        }
+        UserResource::withoutWrapping();
         return new UserResource($user);
     }
 
@@ -87,7 +96,15 @@ class UserController extends Controller
             return response()->json(['error' => $validator->errors()], 401);
         }
 
-        $user = User::findOrFail($id);
+        $user = User::findById($id)->first();
+
+        if ( empty($user) ) {
+            return response()->json([
+                'status' => $this->statusNotFound,
+                'data' => 'Not found'
+            ], $this->statusNotFound);
+        }
+
         $password = bcrypt($request->password);
         $user->name = $request->name;
         $user->username = $request->username;
@@ -107,9 +124,17 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::findById($id)->first();
+
+        if ( empty($user) ) {
+            return response()->json([
+                'status' => $this->statusNotFound,
+                'data' => 'Not found'
+            ], $this->statusNotFound);
+        }
+
         if ( $user->delete() ) {
-            return response()->json(['success' => 'Deleted Successfully'], 200);
+            return response()->json(['success' => 'Deleted Successfully'], $this->statusSuccess);
         }
     }
 }
