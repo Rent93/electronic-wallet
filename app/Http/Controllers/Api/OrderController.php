@@ -78,6 +78,7 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
+
     {
         //
     }
