@@ -18,7 +18,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::sort('desc')->paginate(2);
+        $orders = Order::sort('desc')->paginate(20);
 
         return view('front-end.order.index', compact(['orders']));
     }
@@ -103,6 +103,7 @@ class OrderController extends Controller
                 dd('baokim');
                 break;
             case 'stripe':
+                dd($request->stripeToken);
                 Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
                 /**
@@ -132,7 +133,7 @@ class OrderController extends Controller
                     $order->currency = $charge['currency'];
                     $order->content = $charge['description'];
                     $order->status = $charge['status'];
-                    $order->ip_address = $_SERVER['REMOTE_ADDR'];
+                    $order->ip_address = request()->ip();
 
                     $order->save();
 

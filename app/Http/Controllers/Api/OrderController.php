@@ -6,6 +6,9 @@ use App\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Order as OrderResouce;
+use Session;
+use Stripe;
+use Auth;
 
 class OrderController extends Controller
 {
@@ -46,7 +49,58 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        dd('Bingooo');
+        $payment_method = $request->payment_method;
+        switch ($payment_method) {
+            case 'vnpay':
+                dd('VNPAY');
+                break;
+            case 'stripe':
+                Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
+                /**
+                 * Create customer save bby API(s)
+                 */
+                $customer = Stripe\Customer::create([
+                    "email" => $request->email,
+                    "source" => $request->stripeToken
+                ]);
+
+                $charge = Stripe\Charge::create([
+                    'amount' => ($request->amount) * 100,
+                    'currency' => 'usd',
+                    'description' => $request->content,
+                    'customer' => $customer->id,
+                ]);
+                if ($charge['status'] == 'succeeded') {
+
+                    /**
+                     * Save to Database
+                     */
+                    $order = new Order();
+                    $order->code = $charge['id'];
+                    $order->user_id = Auth::user()->id;
+                    $order->amount = $charge['amount'];
+                    $order->currency = $charge['currency'];
+                    $order->content = $charge['description'];
+                    $order->status = $charge['status'];
+                    $order->ip_address = request()->ip();
+
+                    $order->save();
+
+                    return response()->json([
+                        'status' => $this->statusSuccess,
+                        'data' => 'Your payment was successfully'
+                    ], $this->statusSuccess);
+
+                } else {
+                    return response()->json([
+                        'status' => $this->statusNotFound,
+                        'data' => 'Please check your information again and make sure it\'s correct!.'
+                    ], $this->statusNotFound);
+                }
+                break;
+        }
+
     }
 
     /**

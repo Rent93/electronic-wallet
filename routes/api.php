@@ -49,7 +49,7 @@ Route::prefix('v1')->group(function() {
             ->name('api.order.store');
         Route::put('order/{id}', 'Api\OrderController@update')
             ->name('api.order.update');
-        Route::delele('order/{id}', 'Api\OrderController@destroy')
+        Route::delete('order/{id}', 'Api\OrderController@destroy')
             ->name('api.order.delete');
 
     });
