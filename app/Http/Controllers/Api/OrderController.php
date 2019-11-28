@@ -46,7 +46,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd('Bingooo');
     }
 
     /**
@@ -78,7 +78,6 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-
     {
         //
     }

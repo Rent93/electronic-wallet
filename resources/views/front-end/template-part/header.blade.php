@@ -16,9 +16,7 @@
             'stripe_publish_key': 'pk_test_Zv29eYQ1JzjMYBLCvc6PyJYD00WeXrOFpy',
         };
     </script>
-
-    <script src="https://js.stripe.com/v3/"></script>
-    <script src="{{ asset('js/main.rent.js') }}"></script>
+    @yield('scripts_header')
 </head>
 
 <body>

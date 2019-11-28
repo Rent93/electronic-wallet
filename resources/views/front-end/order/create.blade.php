@@ -2,6 +2,11 @@
 
 @section('title', 'Create new Order')
 
+@section('scripts_header')
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="{{ asset('js/main.rent.js') }}"></script>
+@endsection
+
 @section('content')
     <div class="row">
         <div class="col-md-6 offset-md-3">
@@ -64,7 +69,7 @@
                                 <div class="form-check js-change-payment-method">
                                     <label class="container--custom" data-type="vnpay">
                                         <span>VN Pay</span>
-                                        <input type="radio"name="payment_method" value="vnpay">
+                                        <input type="radio" name="payment_method" value="vnpay">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
@@ -102,7 +107,8 @@
                                 </div>
                             </div>
                         </section>
-                        <section class="form-group payment-method payment-method-info" id="baokim" style="display: none">
+                        <section class="form-group payment-method payment-method-info" id="baokim"
+                                 style="display: none">
                             <h3 class="title">PAYMENT INFORMATION</h3>
                             <div class="selection">
                                 This one will be update later. (BaoKim)
